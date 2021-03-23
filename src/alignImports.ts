@@ -1,5 +1,5 @@
 import * as vscode         from 'vscode';
-import { Position, Range } from "vscode";
+import { Position, Range } from "vscode"
 
 export default (text: string): void => {
   const lines = text.split('\n');
@@ -9,8 +9,8 @@ export default (text: string): void => {
   for (let i = 0; i < lines.length; i++) {
     // trim white spaces
     const line = lines[i].trim();
-    if (/^import.*from.*/.test(line) && level === 0) {   // It is an import on level 0
-      const fromPosition = line.indexOf('from'); // TODO: This is not the better way
+    if (/^import .* from .*/.test(line) && level === 0) {   // It is an import on level 0
+      const fromPosition = line.indexOf('from');
       imports.set(i, fromPosition);
     }
   }

@@ -9,7 +9,7 @@ Every .ts and .js file will be formatted on save, performing an alignment of all
 
 See this example:
 
-![feature X](https://github.com/d4nicoder/malign-imports/main/assets/align-imports.gif)
+![Example](https://raw.githubusercontent.com/d4nicoder/align-imports/main/assets/align-imports.gif)
 
 ## Release Notes
 

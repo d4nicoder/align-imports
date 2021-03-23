@@ -6,6 +6,15 @@
   "engines": {
     "vscode": "^1.54.0"
   },
+  "author": {
+    "name": "Daniel Cañada García",
+    "email": "d4nicoder@gmail.com",
+    "url": "https://github.com/d4nicoder"
+  },
+  "repository": {
+    "url": "https://github.com/d4nicoder/align-imports",
+    "type": "git"
+  },
   "categories": [
     "Formatters"
   ],

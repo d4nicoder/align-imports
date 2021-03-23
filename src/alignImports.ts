@@ -35,12 +35,10 @@ export default (text: string): void => {
       end[1] = lines[entry[0]].length;
     }
     if (pos < highestPosition) {
-      console.log(`Adjunsting line ${entry[0]}`);
       const line = lines[entry[0]];
       const preLine = line.slice(0, pos);
       const postLine = Array(highestPosition - pos).fill(' ').join('') + line.slice(pos);
       newImports.push(preLine + postLine);
-      // lines[entry[0]] = newLine;
     } else {
       newImports.push(lines[entry[0]]);
     }

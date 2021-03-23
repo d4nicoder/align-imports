@@ -1,4 +1,4 @@
-import * as vscode from 'vscode';
+import * as vscode         from 'vscode';
 import { Position, Range } from "vscode";
 
 export default (text: string): void => {
@@ -24,7 +24,8 @@ export default (text: string): void => {
 
   let start: number[] = [0, 0];
   let end: number[] = [0, 0];
-  const newImports: string[] = [];
+
+  const editor = vscode.window.activeTextEditor;
 
   Array.from(imports.entries()).forEach((entry, index) => {
     const pos = entry[1];
@@ -38,19 +39,16 @@ export default (text: string): void => {
       const line = lines[entry[0]];
       const preLine = line.slice(0, pos);
       const postLine = Array(highestPosition - pos).fill(' ').join('') + line.slice(pos);
-      newImports.push(preLine + postLine);
-    } else {
-      newImports.push(lines[entry[0]]);
+      const newLine = preLine + postLine;
+
+      const start = new Position(entry[0], 0);
+      const end = new Position(entry[0], line.length);
+      const range = new Range(start, end)
+      if (editor) {
+        editor.edit(editBuilder => {
+          editBuilder.replace(range, newLine);
+        });
+      }
     }
   });
-
-  const initPos = new Position(start[0], start[1]);
-  const endPos = new Position(end[0], end[1]);
-  const range = new Range(initPos, endPos);
-  const editor = vscode.window.activeTextEditor;
-  if (editor) {
-    editor.edit(editBuilder => {
-      editBuilder.replace(range, newImports.join('\n'));
-    });
-  }
 };

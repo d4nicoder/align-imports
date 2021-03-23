@@ -19,4 +19,17 @@ suite('alignImports', () => {
 
 		assert.notDeepStrictEqual(alignImports(sample), expected);
 	});
+
+	test('Should ignore non import line', () => {
+		const sample = `
+		import fs from 'fs'
+		// Comment
+		import path from 'path'`;
+		const expected = `
+		import fs   from 'fs'
+		// Comment
+		import path from 'path'`;
+
+		assert.notDeepStrictEqual(alignImports(sample), expected);
+	});
 });

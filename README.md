@@ -13,13 +13,7 @@ See this example:
 
 ## Release Notes
 
-### 0.0.5
-
-Bug fixes
-
-### 0.0.1
-
-Initial release. This is my first extension and the first release. Please any feedback is welcome.
+For release notes take a look at [CHANGELOG](./CHANGELOG.md) file
 
 To report bugs or suggestions, please go to my Github repository on [github.com/d4nicoder/align-imports](https://github.com/d4nicoder/align-imports)
 

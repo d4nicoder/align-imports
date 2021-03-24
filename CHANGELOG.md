@@ -4,6 +4,14 @@ All notable changes to the "align-imports" extension will be documented in this 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## Unreleased
+- Add configuration options
+
+## [0.0.6]
+
+- Fixed: Sometimes it only align one import a time
+- Added: Check if the import is in the first level and ignore others.
+
 ## [0.0.4]
 
 - Improved searching for imports

@@ -1,13 +1,15 @@
 import * as vscode         from 'vscode';
 import { Position, Range } from "vscode"
+import levelSolver         from './levelSolver';
 
-export default (text: string): void => {
+export default async (text: string): Promise<void> => {
   const lines = text.split('\n');
   let level = 0;
   const imports: Map<number, number> = new Map();
 
   for (let i = 0; i < lines.length; i++) {
     // trim white spaces
+    level += levelSolver(lines[i]);
     const line = lines[i].trim();
     if (/^import .* from .*/.test(line) && level === 0) {   // It is an import on level 0
       const fromPosition = line.indexOf('from');
@@ -27,6 +29,8 @@ export default (text: string): void => {
 
   const editor = vscode.window.activeTextEditor;
 
+  const ranges: [Range, string][] = []
+
   Array.from(imports.entries()).forEach((entry, index) => {
     const pos = entry[1];
     if (index === 0) {
@@ -44,11 +48,34 @@ export default (text: string): void => {
       const start = new Position(entry[0], 0);
       const end = new Position(entry[0], line.length);
       const range = new Range(start, end)
-      if (editor) {
-        editor.edit(editBuilder => {
-          editBuilder.replace(range, newLine);
-        });
-      }
+      ranges.push([range, newLine])
+      // if (editor) {
+      //   console.log(`Editing ${line}`)
+      //   editor.edit(editBuilder => {
+      //     editBuilder.replace(range, newLine);
+      //     console.log(`   Edited`)
+      //   });
+      // }
     }
   });
+
+  const process = async (): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      if (ranges.length === 0) {
+        resolve()
+        return
+      }
+      
+      const actual = ranges.splice(0, 1)[0]
+      if (editor) {
+        editor.edit((editBuilder) => {
+          editBuilder.replace(actual[0], actual[1]);
+        }).then(() => {
+          process().then(resolve)
+        });
+      }
+    })
+  }
+
+  await process()
 };

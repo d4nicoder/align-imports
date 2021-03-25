@@ -13,7 +13,13 @@ See this example:
 
 ## Release Notes
 
-For release notes take a look at [CHANGELOG](./CHANGELOG.md) file
+## [0.1.0]
+
+- Add configuration option to disable auto align on save
+- Add command to manually align imports
+
+
+For all release notes take a look at [CHANGELOG](./CHANGELOG.md) file
 
 To report bugs or suggestions, please go to my Github repository on [github.com/d4nicoder/align-imports](https://github.com/d4nicoder/align-imports)
 

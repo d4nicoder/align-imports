@@ -4,7 +4,7 @@
   "description": "Auto align imports on save",
   "icon": "assets/align-imports.png",
   "publisher": "danielcanada",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.54.0"
   },
@@ -24,6 +24,29 @@
     "onLanguage:typescript",
     "onLanguage:javascript"
   ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "align-imports.align",
+        "title": "Align imports",
+        "category": "Align imports",
+        "icon": {
+          "light": "assets/align-imports.svg",
+          "dark": "assets/align-imports.svg"
+        }
+      }
+    ],
+    "configuration": {
+      "title": "Align imports",
+      "properties": {
+        "align-imports.alignOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Align imports on save file"
+        }
+      }
+    }
+  },
   "main": "./out/extension.js",
   "scripts": {
     "vscode:prepublish": "npm run compile",

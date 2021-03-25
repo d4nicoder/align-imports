@@ -5,8 +5,19 @@ import sortImports from './alignImports';
 
 // this method is called when your extension is activated
 export function activate(context: vscode.ExtensionContext) {
+
+	vscode.commands.registerCommand('align-imports.align', () => {
+		const editor = vscode.window.activeTextEditor;
+		if (editor) {
+			sortImports(editor.document.getText())
+		}
+	})
+
 	vscode.workspace.onWillSaveTextDocument(async (document) => {
-		document.waitUntil(sortImports(document.document.getText()))
+		const activeOnSave = vscode.workspace.getConfiguration('align-imports').get('alignOnSave')
+		if (activeOnSave) {
+			document.waitUntil(sortImports(document.document.getText()))
+		}
 	});
 }
 
